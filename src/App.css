@@ -36,3 +36,18 @@
     transform: rotate(360deg);
   }
 }
+.poke-details {
+  border: 1px solid black;
+  height: 70vh;
+}
+.pokedex {
+  border: 1px solid black;
+  height: 70vh;
+  width: 20%;
+  overflow-y: scroll;
+}
+
+.main {
+  display: flex;
+  flex-direction: row;
+}

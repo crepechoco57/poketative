@@ -1,24 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Header from "./Header/Header";
+import { useEffect, useContext } from "react";
+import PokeContext from "./data/PokeContext";
+import Test from "./Test/Test";
+import PokeDex from "./PokeDex/PokeDex";
+import PokeDetails from "./PokeDetails/PokeDetails";
 
 function App() {
+  const [state, dispatch] = useContext(PokeContext);
+
+  useEffect(() => {
+    fetch("https://pokeapi.co/api/v2/pokemon?limit=151&offset=0", {
+      method: "GET",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        let foundedData = data.results;
+        dispatch({ type: "SET_POKEMONS", payload: foundedData });
+      });
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header />
+      <div className="main">
+        <PokeDex />
+        <PokeDetails />
+      </div>
+    </>
   );
 }
 
